@@ -1,5 +1,11 @@
 package unionFindSet;
 
+/**
+ * 快速查找的并查集
+ *
+ * 同一连通分量的所有节点的id值均相等
+ * 查找的只需要返回数组值即可
+ */
 public class QuickFindUF extends UF {
 
     public QuickFindUF(int N) {
