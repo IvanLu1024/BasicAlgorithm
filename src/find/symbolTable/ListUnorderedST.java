@@ -1,4 +1,4 @@
-package symbolTable;
+package find.symbolTable;
 
 /**
  * 链表实现的无排序的符号表

@@ -1,4 +1,4 @@
-package symbolTable;
+package find.symbolTable;
 
 import java.util.ArrayList;
 import java.util.List;

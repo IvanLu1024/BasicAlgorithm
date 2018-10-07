@@ -1,4 +1,4 @@
-package symbolTable;
+package find.symbolTable;
 
 public interface UnorderedST<key,value> {
     int size();
