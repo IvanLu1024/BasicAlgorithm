@@ -1,5 +1,8 @@
 package find.bst;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 二叉查找树
  */
@@ -162,6 +165,65 @@ public class BST<Key extends Comparable<Key>,Value> {
         recalculateSize(x);
         return x;
 
+
+    }
+
+    /**
+     * 如果待删除的节点只有一个子树，
+     * 那么只需要让指向待删除节点的链接指向唯一的子树即可；
+     * 否则，让右子树的最小节点替换该节点。
+     * @param key
+     */
+    public void delete(Key key){
+        root=delete(root,key);
+    }
+
+    private Node delete(Node x, Key key) {
+        if (x==null)
+            return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp<0)
+            x.left=delete(x.left,key);
+        else if (cmp>0)
+            x.right=delete(x.right,key);
+        else {
+            if (x.right==null)
+                return x.left;
+            if (x.left==null)
+                return x.right;
+            Node t=x;
+            x=min(t.right);
+            x.right=deleteMin(t.right);
+            x.left=t.left;
+        }
+        recalculateSize(x);
+        return x;
+
+    }
+
+    /**
+     * 利用二叉查找树中序遍历的结果为递增的特点
+     * @param l
+     * @param h
+     * @return
+     */
+    public List<Key> keys(Key l,Key h){
+        return keys(root,l,h);
+    }
+
+    private List<Key> keys(Node x, Key l, Key h) {
+        List<Key> list=new ArrayList<>();
+        if (x==null)
+            return list;
+        int cmpL = l.compareTo(x.key);
+        int cmpH = h.compareTo(x.key);
+        if (cmpL<0)
+            list.addAll(keys(x.left,l,h));
+        if (cmpL<=0&&cmpH>=0)
+            list.add(x.key);
+        if (cmpH>0)
+            list.addAll(keys(x.right,l,h));
+        return list;
 
     }
 
