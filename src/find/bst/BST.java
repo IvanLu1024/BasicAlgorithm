@@ -59,6 +59,11 @@ public class BST<Key extends Comparable<Key>,Value> {
 
     }
 
+    /**
+     * 添加
+     * @param key
+     * @param value
+     */
     public void put(Key key,Value value){
         put(root,key,value);
     }
@@ -74,6 +79,92 @@ public class BST<Key extends Comparable<Key>,Value> {
         recalculateSize(x);
         return x;
     }
+
+    /**
+     * 小于等于键的最大键
+     * @param key
+     * @return
+     */
+    public Key floor(Key key){
+        Node x = floor(root, key);
+        if (x==null)
+            return null;
+        return x.key;
+
+    }
+    private Node floor(Node x,Key key){
+        if (x==null)
+            return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp==0)
+            return x;
+        if (cmp<0)
+            return floor(x.left,key);
+        else{
+            Node t = floor(x.right, key);
+            return t!=null?t:x;
+        }
+
+
+    }
+
+    /**
+     * key的排名
+     * @param key
+     * @return
+     */
+    public int rank(Key key){
+        return rank(key,root);
+    }
+
+    private int rank(Key key, Node x) {
+        if (x==null)
+            return 0;
+        int cmp = key.compareTo(x.key);
+        if (cmp==0)
+            return size(x.left);
+        else if (cmp<0)
+            return rank(key,x.left);
+        else
+            return 1+size(x.left)+rank(key,x.right);
+
+
+    }
+
+    /**
+     * 最小值的键
+     * @return
+     */
+    public Key min(){
+        return min(root).key;
+    }
+
+    private Node min(Node x) {
+        if (x==null)
+            return null;
+        if (x.left==null)
+            return x;
+        return min(x.left);
+
+    }
+
+    /**
+     * 令指向最小节点的链接指向最小节点的右子树
+     */
+    public void deleteMin(){
+        root=deleteMin(root);
+    }
+
+    private Node deleteMin(Node x) {
+        if (x.left==null)
+            return x.right;
+        x.left= deleteMin(x.left);
+        recalculateSize(x);
+        return x;
+
+
+    }
+
 
 }
 
