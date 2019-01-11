@@ -59,7 +59,9 @@ public class SortTestHelper {
 
             assert isSorted( arr );
 
-            System.out.println(  "sort costs : " + (endTime-startTime)/1000000 + "ms" );
+            double res =(endTime-startTime)/1000000;
+
+            System.out.println(  "sort costs : " +  res + "ms" );
         }
         catch(Exception e){
             e.printStackTrace();
