@@ -3,7 +3,7 @@ package sort;
 /**
  * 希尔排序
  */
-public class Hill<T extends Comparable<T>> extends Sort<T> {
+public class ShellSort<T extends Comparable<T>> extends Sort<T> {
 
 
 
