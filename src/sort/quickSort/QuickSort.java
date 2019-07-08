@@ -17,7 +17,7 @@ public class QuickSort<T extends Comparable<T>>  extends Sort<T> {
     private void sort(T[] nums,int l,int h){
         if (h<=l)
             return;
-        int j=partition(nums,l,h);
+        int j=partition1(nums,l,h);
         sort(nums,l,j-1);
         sort(nums,j+1,h);
     }
@@ -41,6 +41,20 @@ public class QuickSort<T extends Comparable<T>>  extends Sort<T> {
         swap(nums,l,j);
         return j;
 
+    }
+
+    //另一种方式partition的方法
+    private int partition1(T[] nums,int l,int h){
+        int piovt=l;
+        int index=piovt+1;
+        for (int i = index; i <= h; i++) {
+            if (less(nums[i],nums[piovt])){
+                swap(nums,i,index);
+                index++;
+            }
+        }
+        swap(nums,piovt,index-1);
+        return index-1;
     }
 
     /**
